@@ -8,12 +8,19 @@ contract TestCounter2 is Test {
     Counter2 public counter;
 
     function setUp() public {
-        counter = new Counter2(100);
+        counter = new Counter2(1);
     }
 
     function testInc()public {
         counter.increment();
         counter.increment();
-        assertEq(counter.num(), uint256(102), "ok");
+        assertEq(counter.num(), uint256(3), "ok");
+    }
+
+    //In Foundry, when a test function is prefixed with "testFail", the test is considered successful if it reverts at any point during execution
+    function testFailDec() public {
+        counter.decrement();
+        counter.decrement();
+        counter.decrement();
     }
 }
