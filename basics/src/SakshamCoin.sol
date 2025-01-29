@@ -1,17 +1,19 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
 
-contract SakshamCoin {
+import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import { console } from "forge-std/console.sol";
 
-    uint public totalSupply;
+contract SakshamCoin is ERC20{
+
     address public owner;
-    constructor() {
+    constructor() ERC20("Saksham","Saky"){
         owner = msg.sender;
     }
 
-    function mint(uint _amount) public {
-        require(msg.sender == owner, "only owner can mint");
-        totalSupply += _amount;
+    function mint(address to, uint _amount) public {
+        // require(msg.sender == owner, "only owner can mint");
+        _mint(to, _amount);
     }
 
 }
