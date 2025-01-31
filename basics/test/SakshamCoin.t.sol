@@ -55,4 +55,9 @@ contract TestSakshamCoin is Test {
         vm.prank(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
         c.transferFrom(address(this), 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 20);
     }
+
+    function testFailTransfer() public {
+        c.mint(address(this), 20);
+        c.transfer(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 100);
+    }
 }
