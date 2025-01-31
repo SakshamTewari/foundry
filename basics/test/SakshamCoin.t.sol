@@ -45,4 +45,14 @@ contract TestSakshamCoin is Test {
         assertEq(c.balanceOf(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4), 5, "ok");
         assertEq(c.allowance(address(this),0x5B38Da6a701c568545dCfcB03FcB875f56beddC4), 5 );
     }
+
+    // 'testFail' 
+
+    function testFailApprovals() public {
+        c.mint(address(this), 100);
+        c.approve(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 10);
+
+        vm.prank(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
+        c.transferFrom(address(this), 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 20);
+    }
 }
