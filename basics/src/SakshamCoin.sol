@@ -13,6 +13,8 @@ contract SakshamCoin is ERC20{
 
     function mint(address to, uint _amount) public {
         // require(msg.sender == owner, "only owner can mint");
+        console.log("to : ", to );
+        console.log("amount : ", _amount);
         _mint(to, _amount);
     }
 
