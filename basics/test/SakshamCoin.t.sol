@@ -27,11 +27,24 @@ contract TestSakshamCoin is Test {
         assertEq(c.balanceOf(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4), 100, "ok");
 
         // vm.prank (to change msg.sender while test)
+        // vm.prank is a shorthand function that allows us to impersonate an address for just one transaction
+        // 'vm.srartPrank' changes the msg.sender for all subsequent transactions
         vm.prank(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
         c.transfer(address(this), 100);
 
         assertEq(c.balanceOf(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4), 0, "ok");
         assertEq(c.balanceOf(address(this)), 100,"ok");
+
+        // testing vm.startPrank;
+        c.transfer(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 100);
+        vm.startPrank(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4);
+        c.transfer(address(this), 20);
+        c.transfer(address(this), 20);
+        c.transfer(address(this), 20);
+        c.transfer(address(this), 20);
+        c.transfer(address(this), 20);
+
+        assertEq(c.balanceOf(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4), 0, "ok");
 
     }
 
@@ -79,4 +92,7 @@ contract TestSakshamCoin is Test {
 
         c.transfer(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 10);
     }
+
+    
+ 
 }
