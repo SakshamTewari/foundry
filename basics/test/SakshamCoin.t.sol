@@ -8,6 +8,9 @@ contract TestSakshamCoin is Test {
 
     SakshamCoin c;
 
+    // event
+    event Transfer(address indexed from, address indexed to, uint value);
+
     function setUp() public {
         c = new SakshamCoin();
     }
@@ -59,5 +62,21 @@ contract TestSakshamCoin is Test {
     function testFailTransfer() public {
         c.mint(address(this), 20);
         c.transfer(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 100);
+    }
+
+    // Test 'emits'
+
+    function testTransferEmit() public {
+        c.mint(address(this), 100);
+
+        // what values we want to compare with the emitted event? 
+        // we can have maximum of 3 indexed topics , and rest is data
+        // so address from (indexed) = true , address to (indexed) = true, 3rd index (not present) = false, uint data = true 
+        vm.expectEmit(true, true, false, true);
+
+        // what we expect now
+        emit Transfer(address(this), 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 10 );
+
+        c.transfer(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 10);
     }
 }
