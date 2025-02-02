@@ -43,6 +43,7 @@ contract TestSakshamCoin is Test {
         c.transfer(address(this), 20);
         c.transfer(address(this), 20);
         c.transfer(address(this), 20);
+        vm.stopPrank();
 
         assertEq(c.balanceOf(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4), 0, "ok");
 
@@ -93,6 +94,13 @@ contract TestSakshamCoin is Test {
         c.transfer(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 10);
     }
 
+    // 'hoax'
+
+    function testDealExample() public {
+        hoax(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4, 100 ether);
+        c.test{value : 100 ether}();
+        assertEq(c.balance(), 100 ether, "ok");
+    }
     
  
 }
